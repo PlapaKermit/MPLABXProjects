@@ -1,0 +1,12 @@
+_delai_ms: CODE, 816 0 64
+_acq: CODE, 1028 0 34
+_aff_lcd: CODE, 982 0 46
+_pc_to_pic: CODE, 880 0 56
+_main: CODE, 936 0 46
+_aff_lcd_clav: CODE, 472 0 280
+__initialization: CODE, 1096 0 6
+_get_val_clav: CODE, 8 0 140
+_Init: CODE, 752 0 64
+i2_acq: CODE, 1062 0 34
+_init_aff_lcd: CODE, 152 0 320
+Total: 1090
