@@ -13,17 +13,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S68 . . . . . . ]
 "1053 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f87k22.h
 [v _RCSTA2bits `VS68 ~T0 @X0 0 e@3874 ]
-[s S746 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S746 . TMR1IF TMR2IF TMR1GIF SSP1IF TX1IF RC1IF ADIF PSPIF ]
-[s S747 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S747 . . SSPIF TXIF RCIF ]
-[u S745 `S746 1 `S747 1 ]
-[n S745 . . . ]
-"11896
-[v _PIR1bits `VS745 ~T0 @X0 0 e@3998 ]
 "685
 [v _RCREG2 `Vuc ~T0 @X0 0 e@3869 ]
-[; ;liaisonUSB.h: 1: unsigned char pc_to_pic();
+"21705
+[v _TX1IF `Vb ~T0 @X0 0 e@31988 ]
+"13426
+[v _TXREG1 `Vuc ~T0 @X0 0 e@4013 ]
+[; ;liaisonUSB.h: 1: void pc_to_pic(unsigned char c);
+[; ;liaisonUSB.h: 2: unsigned char pic_to_pic();
 [; ;pic18f87k22.h: 44: extern volatile unsigned char PMD3 @ 0xF16;
 "46 C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f87k22.h
 [; ;pic18f87k22.h: 46: asm("PMD3 equ 0F16h");
@@ -9163,10 +9160,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 146: extern void _delaywdt(unsigned long);
 [; ;pic18.h: 148: extern void _delay3(unsigned char);
 "5 C:/Users/etien/MPLABXProjects/TP_02.X/liaisonUSB.c
-[v _pc_to_pic `(uc ~T0 @X0 1 ef ]
+[v _pic_to_pic `(uc ~T0 @X0 1 ef ]
 {
-[; ;liaisonUSB.c: 5: unsigned char pc_to_pic(){
-[e :U _pc_to_pic ]
+[; ;liaisonUSB.c: 5: unsigned char pic_to_pic(){
+[e :U _pic_to_pic ]
 [f ]
 [; ;liaisonUSB.c: 6: RCSTA2bits.SPEN = 1;
 "6
@@ -9184,21 +9181,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 1239 ]
 [e $ != -> . . _RCSTA2bits 0 1 `i -> -> -> 0 `i `Vuc `i 1240  ]
 [e :U 1241 ]
-[; ;liaisonUSB.c: 10: while(!PIR1bits.RC1IF);
-"10
-[e $U 1242  ]
-[e :U 1243 ]
-[e :U 1242 ]
-[e $ ! != -> . . _PIR1bits 0 5 `i -> -> -> 0 `i `Vuc `i 1243  ]
-[e :U 1244 ]
-[; ;liaisonUSB.c: 11: PIR1bits.RC1IF = 0;
+[; ;liaisonUSB.c: 11: return RCREG2;
 "11
-[e = . . _PIR1bits 0 5 -> -> 0 `i `uc ]
-[; ;liaisonUSB.c: 12: return RCREG2;
-"12
 [e ) _RCREG2 ]
 [e $UE 1238  ]
-[; ;liaisonUSB.c: 13: }
-"13
+[; ;liaisonUSB.c: 12: }
+"12
 [e :UE 1238 ]
+}
+"15
+[v _pc_to_pic `(v ~T0 @X0 1 ef1`uc ]
+{
+[; ;liaisonUSB.c: 15: void pc_to_pic(unsigned char c){
+[e :U _pc_to_pic ]
+[v _c `uc ~T0 @X0 1 r1 ]
+[f ]
+[; ;liaisonUSB.c: 16: while (TX1IF == 0) {}
+"16
+[e $U 1243  ]
+[e :U 1244 ]
+{
+}
+[e :U 1243 ]
+[e $ == -> _TX1IF `i -> 0 `i 1244  ]
+[e :U 1245 ]
+[; ;liaisonUSB.c: 17: TXREG1 = c;
+"17
+[e = _TXREG1 _c ]
+[; ;liaisonUSB.c: 18: }
+"18
+[e :UE 1242 ]
 }

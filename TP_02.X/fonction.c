@@ -15,17 +15,16 @@ void Init(void){
  INTCONbits.GIE = 1; //Interruptions globales activées
  INTCONbits.INT0IE = 1; //Interruptions externes sur INTO activées
  INTCONbits.INT0IF = 0; //acquittement init
-// Obligatoire : Désactivation des fonctions analogiques
+ // Obligatoire : Désactivation des fonctions analogiques
  ANCON0=0x00;
  ANCON1=0x00;
  ANCON2=0x00;
+ // Obligatoire : Activation des ports
  TRISD=0x00; // 0 => PORTD en sortie
  TRISH=0xFF; // 1 => PORTH en entrée
  TRISG=0x00; // 0 => PORTG en sortie
- TRISGbits.TRISG2 = 1;
- TRISC=0xFF;
-
-}
+    TRISGbits.TRISG2 = 1;
+    TRISC=0xFF;}
 int Eeprom_read(unsigned char addr){
     // read initialisation sequence
     EEADR = addr;
@@ -73,3 +72,10 @@ __delay_ms( val) ;
         __delay_ms(1);
     }
 }
+
+void interrupt_init(){
+    INTCON =0x00;
+    INTCONbits.PEIE_GIEL = 1; //Interruptions peripheriques activées
+    INTCONbits.GIE_GIEH = 1; //Interruptions globales activées
+    INTCONbits.INT0E = 1; //Interruptions externes sur INTO activées
+};

@@ -2,7 +2,8 @@
 # 1 "C:/Users/etien/MPLABXProjects/TP_02.X/liaisonUSB.c"
 
 # 1 "C:/Users/etien/MPLABXProjects/TP_02.X/liaisonUSB.h"
-unsigned char pc_to_pic();
+void pc_to_pic(unsigned char c);
+unsigned char pic_to_pic();
 
 # 44 "C:\Program Files (x86)\Microchip\xc8\v1.12\include\pic18f87k22.h"
 extern volatile unsigned char PMD3 @ 0xF16;
@@ -11927,12 +11928,17 @@ extern void _delaywdt(unsigned long);
 extern void _delay3(unsigned char);
 
 # 5 "C:/Users/etien/MPLABXProjects/TP_02.X/liaisonUSB.c"
-unsigned char pc_to_pic(){
+unsigned char pic_to_pic(){
 RCSTA2bits.SPEN = 1;
 RCSTA2bits.RX9 = 1;
 RCSTA2bits.CREN = 1;
 while(RCSTA2bits.OERR);
-while(!PIR1bits.RC1IF);
-PIR1bits.RC1IF = 0;
+
 return RCREG2;
+}
+
+
+void pc_to_pic(unsigned char c){
+while (TX1IF == 0) {}
+TXREG1 = c;
 }

@@ -1,12 +1,16 @@
 #include "liaisonUSB.h"
 #include <xc.h>
 
-//envoi des toucher clavier PC vers le microcontroleur
-unsigned char pc_to_pic(){
-    RCSTA2bits.SPEN = 1;// activation du port de communication
-    RCSTA2bits.RX9 = 1;// 9 bits de données
-    RCSTA2bits.CREN = 1; // activation de la réception
-    while(RCSTA2bits.OERR); // si erreur de communication, on la réinitialise
+//send a char to the PIC
+void char_to_pic(unsigned char c) {
+    while (PIR1bits.TXIF == 0) {
+    }
+    TXREG = c;
+}
 
-    return RCREG2; // retourne le caractère reçu
+//send a char to the PC
+unsigned char char_to_pc() {
+    while (PIR1bits.RCIF == 0) {
+    }
+    return RCREG;
 }

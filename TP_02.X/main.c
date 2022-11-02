@@ -1,4 +1,5 @@
 //compileur : xc8
+//microcontroleur : PIC18F87K22
 #include "fonction.h"
 #include <xc.h>
 #include "LCD.h"
@@ -31,10 +32,9 @@
 }*/ //TP3
 void main(){
     Init();
+    interrupt_init();
     init_aff_lcd();
-    acq();
-    while(1){
-        aff_lcd(pc_to_pic()+48);
-        delai_ms(100);
+    while (1){
+
     }
 }
