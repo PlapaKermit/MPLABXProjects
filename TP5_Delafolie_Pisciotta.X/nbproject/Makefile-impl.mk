@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=TP2_Jamet_Sollari.X  test
+PROJECTNAME=TP5_Delafolie_Pisciotta.X
 
 # Active Configuration
 DEFAULTCONF=default

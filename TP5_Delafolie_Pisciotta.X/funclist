@@ -1,0 +1,14 @@
+___awdiv: CODE, 130362 0 188
+_acq: CODE, 129956 0 34
+_start_timer: CODE, 129906 0 4
+___awmod: CODE, 130194 0 168
+_main: CODE, 130058 0 136
+_writeLCD_number: CODE, 130550 0 202
+__initialization: CODE, 129924 0 4
+_init_timer: CODE, 129934 0 22
+_reset_timer: CODE, 129910 0 6
+_lecture_timer: CODE, 129916 0 8
+_stop_timer: CODE, 129902 0 4
+_Init: CODE, 129990 0 68
+_init_aff_lcd: CODE, 130752 0 320
+Total: 1164
