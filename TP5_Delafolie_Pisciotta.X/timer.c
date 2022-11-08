@@ -20,11 +20,11 @@ void init_timer(void) {
 }
 
 void start_timer(void) {
-    T0CONbits.TMR0ON = 1;
+    T0CONbits.TMR0ON = 1; // start timer0
 }
 
 void stop_timer(void) {
-    T0CONbits.TMR0ON = 0;
+    T0CONbits.TMR0ON = 0; // stop timer0
 }
 
 int lecture_timer(void) {

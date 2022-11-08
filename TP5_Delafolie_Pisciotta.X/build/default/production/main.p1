@@ -30,32 +30,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S651 . . . . . . . . . . ]
 "10305 /opt/microchip/xc8/v1.12/include/pic18f87k22.h
 [v _LATCbits `VS651 ~T0 @X0 0 e@3979 ]
-[s S555 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S555 . RB0 RB1 RB2 RB3 RB4 RB5 RB6 RB7 ]
-[s S556 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S556 . INT0 INT1 INT2 INT3 KBI0 KBI1 KBI2 KBI3 ]
-[s S557 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S557 . FLT0 . CTED1 CTED2 . T3CKI ]
-[s S558 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S558 . . CCP2_P2A . T1G ]
-[s S559 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S559 . . PGM PGC PGD ]
-[s S560 :3 `uc 1 :1 `uc 1 ]
-[n S560 . . CCP2_PA2 ]
-[u S554 `S555 1 `S556 1 `S557 1 `S558 1 `S559 1 `S560 1 ]
-[n S554 . . . . . . . ]
-"8296
-[v _PORTBbits `VS554 ~T0 @X0 0 e@3969 ]
-"2 timer.h
-[v _start_timer `(v ~T0 @X0 0 ef ]
-"3
-[v _stop_timer `(v ~T0 @X0 0 ef ]
-"9 LCD.h
-[v _writeLCD_number `(v ~T0 @X0 0 ef1`i ]
-"4 timer.h
-[v _lecture_timer `(i ~T0 @X0 0 ef ]
-"5
-[v _reset_timer `(v ~T0 @X0 0 ef ]
 [; ;fonction.h: 1: void Init (void);
 [; ;fonction.h: 2: void Eeprom_write(unsigned char addr, unsigned char data);
 [; ;fonction.h: 3: int Eeprom_read(unsigned char addr);
@@ -9241,60 +9215,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 15: init_timer();
 "15
 [e ( _init_timer ..  ]
-[; ;main.c: 18: LATCbits.LATC2 = 1;
-"18
-[e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
-[; ;main.c: 20: while (1) {
-"20
-[e :U 1240 ]
-{
-"21
-[v _svent `i ~T0 @X0 1 a ]
-[; ;main.c: 21: int svent = PORTBbits.RB1;
-[e = _svent -> . . _PORTBbits 0 1 `i ]
-[; ;main.c: 23: while (svent == 0){svent = PORTBbits.RB1;};
-"23
-[e $U 1242  ]
-[e :U 1243 ]
-{
-[e = _svent -> . . _PORTBbits 0 1 `i ]
-}
-[e :U 1242 ]
-[e $ == _svent -> 0 `i 1243  ]
-[e :U 1244 ]
-[; ;main.c: 24: start_timer();
-"24
-[e ( _start_timer ..  ]
-[; ;main.c: 25: svent = PORTBbits.RB1;
-"25
-[e = _svent -> . . _PORTBbits 0 1 `i ]
-[; ;main.c: 26: while (svent == 1){svent = PORTBbits.RB1;};
-"26
-[e $U 1245  ]
-[e :U 1246 ]
-{
-[e = _svent -> . . _PORTBbits 0 1 `i ]
-}
-[e :U 1245 ]
-[e $ == _svent -> 1 `i 1246  ]
-[e :U 1247 ]
-[; ;main.c: 27: stop_timer();
-"27
-[e ( _stop_timer ..  ]
-[; ;main.c: 28: writeLCD_number(lecture_timer());
-"28
-[e ( _writeLCD_number (1 ( _lecture_timer ..  ]
-[; ;main.c: 29: reset_timer();
-"29
-[e ( _reset_timer ..  ]
-"31
-}
-[e :U 1239 ]
-"20
-[e $U 1240  ]
-[e :U 1241 ]
-[; ;main.c: 31: }
-[; ;main.c: 32: }
-"32
+[; ;main.c: 44: LATCbits.LATC2 = 0;
+"44
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+[; ;main.c: 45: }
+"45
 [e :UE 1238 ]
 }
