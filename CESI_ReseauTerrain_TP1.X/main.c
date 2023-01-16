@@ -2,7 +2,7 @@
  * File:   main.c
  * Author: sduval
  *
- * 6 décembre 2020, 17:28
+ * 6 dï¿½cembre 2020, 17:28
  */
 
 
@@ -11,15 +11,16 @@
 #include "main.h"
 #include "spi.h"
 #include "eep_spi.h"
+#include "UART.h"
 
 void initialisation_des_ports()
 {
-// Désactivation du bus externe
-    MEMCON=0xA0;    //ebdis=1 bus désactivé (sauf en cas d'accès externe)
+// Dï¿½sactivation du bus externe
+    MEMCON=0xA0;    //ebdis=1 bus dï¿½sactivï¿½ (sauf en cas d'accï¿½s externe)
 
-// Désactivation des fonctions analogiques
+// Dï¿½sactivation des fonctions analogiques
     ANCON0=0x03; // ecran tactile en analogique X et Y
-    ANCON1=0x08; // AN11 = entrée analogique V_pot
+    ANCON1=0x08; // AN11 = entrï¿½e analogique V_pot
     ANCON2=0x00;
 
 
@@ -28,7 +29,7 @@ void initialisation_des_ports()
     LED_G=0;
     LED_B=0;
 
-// Défintion du sens des ports
+// Dï¿½fintion du sens des ports
     TRISAbits.TRISA2=0; //LED1
     TRISAbits.TRISA3=0; //LED2
     TRISAbits.TRISA4=0; //LED3
@@ -38,8 +39,8 @@ void initialisation_des_ports()
     TRISGbits.TRISG0=0; //LED_B en sortie
 
 // Mise en place des pull up
-    INTCON2bits.RBPU=0; // Pull up PORTB activé
-    PADCFG1bits.REPU=1; // Pull up PORTE activé
+    INTCON2bits.RBPU=0; // Pull up PORTB activï¿½
+    PADCFG1bits.REPU=1; // Pull up PORTE activï¿½
 
 }
 

@@ -49,7 +49,11 @@ uint8_t EEP_SPI_ReadByte(uint8_t Fu8Address)
 
 void EEP_SPI_WriteByte(uint8_t Fu8Address, uint8_t Fu8Data)
 {
-    uint8_t tu8Data[3] = {0x02, Fu8Address, Fu8Data};
+    uint8_t tu8Data[3] = {0, 0, 0};
+    tu8Data[0] = 0x02;
+    tu8Data[1] = Fu8Address;
+    tu8Data[2] = Fu8Data;
+
 
     // Wait if EEPROM is already writing a data
     while(EEP_SPI_IsWriteInProgress());

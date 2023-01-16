@@ -1,14 +1,15 @@
-Microchip MPLAB XC8 Compiler V2.10 ()
+Microchip MPLAB XC8 Compiler V2.40
 
 Linker command line:
 
--W-3 --edf=/Applications/microchip/xc8/v2.10/pic/dat/en_msgs.txt -cs \
+-W-3 --edf=/opt/microchip/xc8/v2.40/pic/dat/20220703182018_en.msgs -cn \
   -h+dist/default/production/CESI_ReseauTerrain_TP1.X.production.sym \
   --cmf=dist/default/production/CESI_ReseauTerrain_TP1.X.production.cmf -z \
-  -Q18F87K22 -o/tmp/xctvvE1S3 --defsym=__MPLAB_BUILD=1 \
-  -Mdist/default/production/CESI_ReseauTerrain_TP1.X.production.map -E1 \
-  -ver=XC8 --acfsm=1493 -ASTACK=060h-0F15h -pstack=STACK -ACODE=00h-01FFFFh \
-  -ACONST=00h-01FFFFh -ASMALLCONST=01000h-010FFhx496 \
+  -Q18F87K22 -o/tmp/xcXCMOefJ --defsym=__MPLAB_BUILD=1 \
+  --fixupoverflow=error \
+  -Mdist/default/production/CESI_ReseauTerrain_TP1.X.production.map \
+  --md=/tmp/xcXNhLmfo.dat -E1 -ver=XC8 Compiler --acfsm=1493 \
+  -ACODE=00h-01FFFFh -ACONST=00h-01FFFFh -ASMALLCONST=01000h-010FFhx496 \
   -AMEDIUMCONST=01000h-0FFFFh,011000h-01FFFFh -ACOMRAM=01h-05Fh \
   -AABS1=00h-0F15h -ABIGRAM=01h-0F15h \
   -ARAM=060h-0FFh,0100h-01FFhx14,0F00h-0F15h -ABANK0=060h-0FFh \
@@ -17,34 +18,33 @@ Linker command line:
   -ABANK7=0700h-07FFh -ABANK8=0800h-08FFh -ABANK9=0900h-09FFh \
   -ABANK10=0A00h-0AFFh -ABANK11=0B00h-0BFFh -ABANK12=0C00h-0CFFh \
   -ABANK13=0D00h-0DFFh -ABANK14=0E00h-0EFFh -ABANK15=0F00h-0F15h \
-  -ASFR=0F16h-0F5Fh,0F60h-0FFFh \
+  -ASFR=0F16h-0F5Fh,0F60h-0FFFh -ABIGSFR=0F16h-0FFFh \
+  -ACONFIG=0300000h-030000Dh -AIDLOC=0200000h-0200007h \
+  -AEEDATA=0F00000h-0F003FFh -peeprom_data=EEDATA \
   -preset_vec=00h,intcode,intcodelo,powerup,init -pramtop=01000h \
   -psmallconst=SMALLCONST -pmediumconst=MEDIUMCONST -pconst=CONST \
-  -AFARRAM=00h-00h -ACONFIG=0300000h-030000Dh -pconfig=CONFIG \
-  -AIDLOC=0200000h-0200007h -pidloc=IDLOC -AEEDATA=0F00000h-0F003FFh \
-  -peeprom_data=EEDATA \
+  -AFARRAM=00h-00h \
   -prdata=COMRAM,nvrram=COMRAM,nvbit=COMRAM,rbss=COMRAM,rbit=COMRAM \
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  /tmp/xcqZ0zEVg.o \
+  /tmp/xcXaBJkBI.o \
   dist/default/production/CESI_ReseauTerrain_TP1.X.production.o 
 
 Object code version is 3.11
 
 Machine type is 18F87K22
 
-Call graph: (short form)
-
-
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-/tmp/xcqZ0zEVg.o
+/tmp/xcXaBJkBI.o
+                idloc                            200000   200000        8        0       5
+                config                           300000   300000        E        0       4
                 init                                  0        0        4        0       0
-                idloc                            200000   200000        8   200000       0
-                config                           300000   300000        E   300000       0
 dist/default/production/CESI_ReseauTerrain_TP1.X.production.o
+                idloc                            200000   200000        8        0       5
+                config                           300000   300000        E        0       4
                 smallconst                         1000     1000        8      800       0
                 text27                             1AA6     1AA6        2      804       0
                 text26                             1A5A     1A5A       1A      804       0
@@ -81,8 +81,6 @@ dist/default/production/CESI_ReseauTerrain_TP1.X.production.o
                 idataCOMRAM                        1A8A     1A8A       10      804       0
 
 TOTAL           Name                               Link     Load   Length     Space
-        CLASS   STACK          
-
         CLASS   CODE           
                 init                                  0        0        4         0
                 text27                             1AA6     1AA6        2         0
@@ -168,15 +166,21 @@ TOTAL           Name                               Link     Load   Length     Sp
 
         CLASS   SFR            
 
-        CLASS   FARRAM         
+        CLASS   BIGSFR         
 
         CLASS   CONFIG         
-                config                           300000   300000        E         0
+                config                           300000   300000        E         4
 
         CLASS   IDLOC          
-                idloc                            200000   200000        8         0
+                idloc                            200000   200000        8         5
 
         CLASS   EEDATA         
+
+        CLASS   FARRAM         
+
+        CLASS   HEAP           
+
+        CLASS   STACK          
 
 
 
@@ -185,9 +189,7 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 reset_vec                      000000  000004  000004         0       0  CODE    
                 text0                          001008  000AA0  001AA8       804       0  CODE    
                 cstackCOMRAM                   000001  00004E  00004F         1       1  COMRAM  
-                idloc                          200000  000008  200008    200000       0  IDLOC   
                 smallconst                     001000  000008  001008       800       0  SMALLCON
-                config                         300000  00000E  30000E    300000       0  CONFIG  
 
 
 UNUSED ADDRESS RANGES
@@ -210,6 +212,7 @@ UNUSED ADDRESS RANGES
         BANK8            000800-0008FF              100
         BANK9            000900-0009FF              100
         BIGRAM           00004F-000F15              EC7
+        BIGSFR           000F16-000FFF               EA
         CODE             000004-000FFF              FFC
                          001AA8-01FFFF            1E558
         COMRAM           00004F-00005F               11
@@ -221,7 +224,6 @@ UNUSED ADDRESS RANGES
         RAM              000060-000F15              100
         SFR              000F16-000FFF               4A
         SMALLCONST       001AA8-01FFFF              100
-        STACK            000060-000F15              EB6
 
                                   Symbol Table
 
@@ -275,62 +277,6 @@ _TRISFbits                           (abs)        000F97
 _TRISGbits                           (abs)        000F98
 _TRISH                               (abs)        000F99
 _TRISJ                               (abs)        000F9A
-__CFG_ABW$MM                         (abs)        000000
-__CFG_BBSIZ$BB1K                     (abs)        000000
-__CFG_BOREN$OFF                      (abs)        000000
-__CFG_BORPWR$ZPBORMV                 (abs)        000000
-__CFG_BORV$0                         (abs)        000000
-__CFG_BW$8                           (abs)        000000
-__CFG_CCP2MX$PORTBE                  (abs)        000000
-__CFG_CP0$OFF                        (abs)        000000
-__CFG_CP1$OFF                        (abs)        000000
-__CFG_CP2$OFF                        (abs)        000000
-__CFG_CP3$OFF                        (abs)        000000
-__CFG_CP4$OFF                        (abs)        000000
-__CFG_CP5$OFF                        (abs)        000000
-__CFG_CP6$OFF                        (abs)        000000
-__CFG_CP7$OFF                        (abs)        000000
-__CFG_CPB$OFF                        (abs)        000000
-__CFG_CPD$OFF                        (abs)        000000
-__CFG_DEBUG$OFF                      (abs)        000000
-__CFG_EASHFT$OFF                     (abs)        000000
-__CFG_EBRT0$OFF                      (abs)        000000
-__CFG_EBRT1$OFF                      (abs)        000000
-__CFG_EBRT2$OFF                      (abs)        000000
-__CFG_EBRT3$OFF                      (abs)        000000
-__CFG_EBRT4$OFF                      (abs)        000000
-__CFG_EBRT5$OFF                      (abs)        000000
-__CFG_EBRT6$OFF                      (abs)        000000
-__CFG_EBRT7$OFF                      (abs)        000000
-__CFG_EBRTB$OFF                      (abs)        000000
-__CFG_ECCPMX$PORTH                   (abs)        000000
-__CFG_FCMEN$OFF                      (abs)        000000
-__CFG_FOSC$HS1                       (abs)        000000
-__CFG_IESO$OFF                       (abs)        000000
-__CFG_INTOSCSEL$HIGH                 (abs)        000000
-__CFG_MCLRE$ON                       (abs)        000000
-__CFG_MSSPMSK$MSK5                   (abs)        000000
-__CFG_PLLCFG$ON                      (abs)        000000
-__CFG_PWRTEN$OFF                     (abs)        000000
-__CFG_RETEN$ON                       (abs)        000000
-__CFG_RTCOSC$INTOSCREF               (abs)        000000
-__CFG_SOSCSEL$DIG                    (abs)        000000
-__CFG_STVREN$ON                      (abs)        000000
-__CFG_WAIT$ON                        (abs)        000000
-__CFG_WDTEN$OFF                      (abs)        000000
-__CFG_WDTPS$1                        (abs)        000000
-__CFG_WRT0$OFF                       (abs)        000000
-__CFG_WRT1$OFF                       (abs)        000000
-__CFG_WRT2$OFF                       (abs)        000000
-__CFG_WRT3$OFF                       (abs)        000000
-__CFG_WRT4$OFF                       (abs)        000000
-__CFG_WRT5$OFF                       (abs)        000000
-__CFG_WRT6$OFF                       (abs)        000000
-__CFG_WRT7$OFF                       (abs)        000000
-__CFG_WRTB$OFF                       (abs)        000000
-__CFG_WRTC$OFF                       (abs)        000000
-__CFG_WRTD$OFF                       (abs)        000000
-__CFG_XINST$OFF                      (abs)        000000
 __HRAM                               (abs)        000000
 __Habs1                              abs1         000000
 __Hbank0                             bank0        000000
@@ -352,6 +298,7 @@ __Hbank9                             bank9        000000
 __Hbigbss                            bigbss       000000
 __Hbigdata                           bigdata      000000
 __Hbigram                            bigram       000000
+__Hbigsfr                            bigsfr       000000
 __Hbss                               bss          000000
 __HbssCOMRAM                         bssCOMRAM    000000
 __Hcinit                             cinit        000000
@@ -365,6 +312,7 @@ __HdataCOMRAM                        dataCOMRAM   000000
 __Heeprom_data                       eeprom_data  000000
 __Hfarbss                            farbss       000000
 __Hfardata                           fardata      000000
+__Hheap                              heap         000000
 __Hibigdata                          ibigdata     000000
 __Hidata                             idata        000000
 __HidataCOMRAM                       idataCOMRAM  000000
@@ -393,9 +341,10 @@ __Hreset_vec                         reset_vec    000000
 __Hrparam                            rparam       000000
 __Hsfr                               sfr          000000
 __Hsmallconst                        smallconst   001008
-__Hspace_0                           (abs)        30000E
+__Hspace_0                           (abs)        001AA8
 __Hspace_1                           (abs)        00004F
 __Hspace_2                           (abs)        000000
+__Hspace_4                           (abs)        60000E
 __Hstack                             stack        000000
 __Hstruct                            struct       000000
 __Htemp                              temp         000000
@@ -449,12 +398,13 @@ __Lbank9                             bank9        000000
 __Lbigbss                            bigbss       000000
 __Lbigdata                           bigdata      000000
 __Lbigram                            bigram       000000
+__Lbigsfr                            bigsfr       000000
 __Lbss                               bss          000000
 __LbssCOMRAM                         bssCOMRAM    000000
 __Lcinit                             cinit        000000
 __Lclrtext                           clrtext      000000
 __Lcomram                            comram       000000
-__Lconfig                            config       300000
+__Lconfig                            config       000000
 __Lconst                             const        000000
 __LcstackCOMRAM                      cstackCOMRAM 000000
 __Ldata                              data         000000
@@ -462,10 +412,11 @@ __LdataCOMRAM                        dataCOMRAM   000000
 __Leeprom_data                       eeprom_data  000000
 __Lfarbss                            farbss       000000
 __Lfardata                           fardata      000000
+__Lheap                              heap         000000
 __Libigdata                          ibigdata     000000
 __Lidata                             idata        000000
 __LidataCOMRAM                       idataCOMRAM  000000
-__Lidloc                             idloc        200000
+__Lidloc                             idloc        000000
 __Lifardata                          ifardata     000000
 __Linit                              init         000000
 __Lintcode                           intcode      000000
@@ -493,6 +444,7 @@ __Lsmallconst                        smallconst   001000
 __Lspace_0                           (abs)        000000
 __Lspace_1                           (abs)        000000
 __Lspace_2                           (abs)        000000
+__Lspace_4                           (abs)        000000
 __Lstack                             stack        000000
 __Lstruct                            struct       000000
 __Ltemp                              temp         000000
@@ -525,9 +477,10 @@ __Ltext6                             text6        000000
 __Ltext7                             text7        000000
 __Ltext8                             text8        000000
 __Ltext9                             text9        000000
-__S0                                 (abs)        30000E
+__S0                                 (abs)        001AA8
 __S1                                 (abs)        00004F
-__S2                                 (abs)        000000
+__S4                                 (abs)        000000
+__S5                                 (abs)        000000
 ___awdiv                             text10       0013CA
 ___awdiv@counter                     cstackCOMRAM 000005
 ___awdiv@dividend                    cstackCOMRAM 000001
@@ -540,6 +493,8 @@ ___awmod@dividend                    cstackCOMRAM 000001
 ___awmod@divisor                     cstackCOMRAM 000003
 ___awmod@sign                        cstackCOMRAM 000006
 ___extmem_base                       (abs)        020000
+___heap_hi                           (abs)        000000
+___heap_lo                           (abs)        000000
 ___inthi_sp                          stack        000000
 ___intlo_sp                          stack        000000
 ___param_bank                        (abs)        000000
@@ -613,34 +568,6 @@ __ptext7                             text7        0012F8
 __ptext8                             text8        001A02
 __ptext9                             text9        00148E
 __ramtop                             ramtop       001000
-__size_of_EEP_SPI_EnableWrite        (abs)        000000
-__size_of_EEP_SPI_Initialize         (abs)        000000
-__size_of_EEP_SPI_IsWriteInProgress  (abs)        000000
-__size_of_EEP_SPI_ReadByte           (abs)        000000
-__size_of_EEP_SPI_WriteByte          (abs)        000000
-__size_of_EEP_SPI_WriteBytes         (abs)        000000
-__size_of_SPI_ExchangeBlock          (abs)        000000
-__size_of_SPI_ExchangeByte           (abs)        000000
-__size_of_SPI_Initialize             (abs)        000000
-__size_of___awdiv                    (abs)        000000
-__size_of___awmod                    (abs)        000000
-__size_of_check_status_ok            (abs)        000000
-__size_of_clear_graphics             (abs)        000000
-__size_of_clear_text                 (abs)        000000
-__size_of_command                    (abs)        000000
-__size_of_d1command                  (abs)        000000
-__size_of_d2command                  (abs)        000000
-__size_of_delai_us_char              (abs)        000000
-__size_of_drawVericalLine            (abs)        000000
-__size_of_draw_string                (abs)        000000
-__size_of_goto_lico                  (abs)        000000
-__size_of_initialisation_afficheur   (abs)        000000
-__size_of_initialisation_des_ports   (abs)        000000
-__size_of_main                       (abs)        000000
-__size_of_plot1                      (abs)        000000
-__size_of_wait_status_ok             (abs)        000000
-__size_of_write_c_aff                (abs)        000000
-__size_of_write_d_aff                (abs)        000000
 __smallconst                         smallconst   001000
 _check_status_ok                     text3        00183E
 _clear_graphics                      text12       0018B2
@@ -663,7 +590,7 @@ _write_d_aff                         text15       001A26
 check_status_ok@res                  cstackCOMRAM 000001
 clear_graphics@add                   cstackCOMRAM 000009
 clear_text@add                       cstackCOMRAM 000009
-command@cmd                          cstackCOMRAM 000006
+command@cmd                          cstackCOMRAM 000005
 d1command@cmd                        cstackCOMRAM 000005
 d1command@d1                         cstackCOMRAM 000006
 d1command@res                        cstackCOMRAM 000007
@@ -686,7 +613,9 @@ intlevel0                            text         000000
 intlevel1                            text         000000
 intlevel2                            text         000000
 intlevel3                            text         000000
-main@F6860                           dataCOMRAM   00003C
+isa$std                              (abs)        000001
+isa$xinst                            (abs)        000000
+main@F6477                           dataCOMRAM   00003C
 main@tu8Data                         cstackCOMRAM 000014
 main@tu8DataFromEEPROM               cstackCOMRAM 000024
 main@u8Cpt                           cstackCOMRAM 00003B
@@ -694,8 +623,8 @@ main@u8Index                         cstackCOMRAM 00003A
 plot1@add                            cstackCOMRAM 00000C
 plot1@x                              cstackCOMRAM 00000E
 plot1@y                              cstackCOMRAM 000009
-stackhi                              (abs)        000F15
-stacklo                              (abs)        000060
+stackhi                              (abs)        000000
+stacklo                              (abs)        000000
 start                                init         000000
 start_initialization                 cinit        0019AA
 wait_status_ok@err                   cstackCOMRAM 000002
@@ -705,990 +634,63 @@ write_c_aff@command                  cstackCOMRAM 000001
 write_d_aff@data                     cstackCOMRAM 000001
 
 
-FUNCTION INFORMATION:
-
- *************** function _main *****************
- Defined at:
-		line 46 in file "main.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  tu8DataFromE   20   35[COMRAM] unsigned char [20]
-  tu8Data        16   19[COMRAM] unsigned char [16]
-  u8Cpt           1   58[COMRAM] unsigned char 
-  u8Index         1   57[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:        40       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:        41       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:       41 bytes
- Hardware stack levels required when called:    5
- This function calls:
-		_EEP_SPI_Initialize
-		_EEP_SPI_ReadByte
-		_EEP_SPI_WriteBytes
-		_SPI_Initialize
-		___awdiv
-		_clear_graphics
-		_clear_text
-		_drawVericalLine
-		_draw_string
-		_goto_lico
-		_initialisation_afficheur
-		_initialisation_des_ports
- This function is called by:
-		Startup code after reset
- This function uses a non-reentrant model
-
-
- *************** function _initialisation_des_ports *****************
- Defined at:
-		line 15 in file "main.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _initialisation_afficheur *****************
- Defined at:
-		line 165 in file "afficheur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  error_count     1    8[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_check_status_ok
-		_command
-		_d1command
-		_d2command
-		_delai_us_char
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _check_status_ok *****************
- Defined at:
-		line 31 in file "afficheur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  res             1    0[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_initialisation_afficheur
- This function uses a non-reentrant model
-
-
- *************** function _goto_lico *****************
- Defined at:
-		line 276 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  ligne           1    wreg     unsigned char 
-  colonne         1    8[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  ligne           1   11[COMRAM] unsigned char 
-  adr             2   12[COMRAM] unsigned int 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_d2command
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _draw_string *****************
- Defined at:
-		line 244 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  tableau         2    7[COMRAM] PTR unsigned char 
-		 -> STR_1(6), main@tu8DataFromEEPROM(20), 
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr1l, fsr1h, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_d1command
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _drawVericalLine *****************
- Defined at:
-		line 363 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  ligne           1    wreg     unsigned char 
-  colonne         1   14[COMRAM] unsigned char 
-  lenght          1   15[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  ligne           1   16[COMRAM] unsigned char 
-  index           1   17[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    4
- This function calls:
-		_plot1
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _plot1 *****************
- Defined at:
-		line 321 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  x               1    wreg     unsigned char 
-  y               1    8[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  x               1   13[COMRAM] unsigned char 
-  add             2   11[COMRAM] unsigned int 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, prodl, prodh, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		___awdiv
-		___awmod
-		_command
-		_d2command
- This function is called by:
-		_drawVericalLine
- This function uses a non-reentrant model
-
-
- *************** function _command *****************
- Defined at:
-		line 91 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  cmd             1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  cmd             1    5[COMRAM] unsigned char 
-  res             1    0        unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_delai_us_char
-		_wait_status_ok
-		_write_c_aff
- This function is called by:
-		_initialisation_afficheur
-		_plot1
-		_plot0
- This function uses a non-reentrant model
-
-
- *************** function ___awmod *****************
- Defined at:
-		line 7 in file "/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awmod.c"
- Parameters:    Size  Location     Type
-  dividend        2    0[COMRAM] int 
-  divisor         2    2[COMRAM] int 
- Auto vars:     Size  Location     Type
-  sign            1    5[COMRAM] unsigned char 
-  counter         1    4[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  2    0[COMRAM] int 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_plot1
-		_plot0
- This function uses a non-reentrant model
-
-
- *************** function ___awdiv *****************
- Defined at:
-		line 7 in file "/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awdiv.c"
- Parameters:    Size  Location     Type
-  dividend        2    0[COMRAM] int 
-  divisor         2    2[COMRAM] int 
- Auto vars:     Size  Location     Type
-  quotient        2    6[COMRAM] int 
-  sign            1    5[COMRAM] unsigned char 
-  counter         1    4[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  2    0[COMRAM] int 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         8       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        8 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_main
-		_plot1
-		_plot0
- This function uses a non-reentrant model
-
-
- *************** function _clear_text *****************
- Defined at:
-		line 288 in file "afficheur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  add             2    8[COMRAM] unsigned int 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_d1command
-		_d2command
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _clear_graphics *****************
- Defined at:
-		line 299 in file "afficheur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  add             2    8[COMRAM] unsigned int 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_d1command
-		_d2command
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _d2command *****************
- Defined at:
-		line 129 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  d1              1    wreg     unsigned char 
-  d2              1    4[COMRAM] unsigned char 
-  cmd             1    5[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  d1              1    6[COMRAM] unsigned char 
-  res             1    7[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        4 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_delai_us_char
-		_wait_status_ok
-		_write_c_aff
-		_write_d_aff
- This function is called by:
-		_initialisation_afficheur
-		_goto_lico
-		_clear_text
-		_clear_graphics
-		_plot1
-		_clear_cgram
-		_plot0
- This function uses a non-reentrant model
-
-
- *************** function _d1command *****************
- Defined at:
-		line 107 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  d1              1    wreg     unsigned char 
-  cmd             1    4[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  d1              1    5[COMRAM] unsigned char 
-  res             1    6[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_delai_us_char
-		_wait_status_ok
-		_write_c_aff
-		_write_d_aff
- This function is called by:
-		_initialisation_afficheur
-		_draw_string
-		_clear_text
-		_clear_graphics
-		_draw_char
-		_draw_hex8
-		_clear_cgram
- This function uses a non-reentrant model
-
-
- *************** function _write_d_aff *****************
- Defined at:
-		line 5 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  data            1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  data            1    0[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_d1command
-		_d2command
- This function uses a non-reentrant model
-
-
- *************** function _write_c_aff *****************
- Defined at:
-		line 18 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  command         1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  command         1    0[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_command
-		_d1command
-		_d2command
- This function uses a non-reentrant model
-
-
- *************** function _wait_status_ok *****************
- Defined at:
-		line 54 in file "afficheur.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  res             1    3[COMRAM] unsigned char 
-  status          1    2[COMRAM] unsigned char 
-  err             1    1[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        3 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		_delai_us_char
- This function is called by:
-		_command
-		_d1command
-		_d2command
- This function uses a non-reentrant model
-
-
- *************** function _delai_us_char *****************
- Defined at:
-		line 155 in file "afficheur.c"
- Parameters:    Size  Location     Type
-  ucdelai         1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  ucdelai         1    0[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_wait_status_ok
-		_command
-		_d1command
-		_d2command
-		_initialisation_afficheur
- This function uses a non-reentrant model
-
-
- *************** function _SPI_Initialize *****************
- Defined at:
-		line 3 in file "spi.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_WriteBytes *****************
- Defined at:
-		line 66 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-  Fu8Address      1    wreg     unsigned char 
-  Fpu8Data        2   11[COMRAM] PTR unsigned char 
-		 -> main@tu8Data(16), 
-  Fu8Size         1   13[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  Fu8Address      1   14[COMRAM] unsigned char 
-  u8Index         1   15[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         3       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    3
- This function calls:
-		_EEP_SPI_WriteByte
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_WriteByte *****************
- Defined at:
-		line 50 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-  Fu8Address      1    wreg     unsigned char 
-  Fu8Data         1    6[COMRAM] unsigned char 
- Auto vars:     Size  Location     Type
-  Fu8Address      1    7[COMRAM] unsigned char 
-  tu8Data         3    8[COMRAM] unsigned char [3]
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        5 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_EEP_SPI_EnableWrite
-		_EEP_SPI_IsWriteInProgress
-		_SPI_ExchangeBlock
- This function is called by:
-		_EEP_SPI_WriteBytes
- This function uses a non-reentrant model
-
-
- *************** function _SPI_ExchangeBlock *****************
- Defined at:
-		line 30 in file "spi.c"
- Parameters:    Size  Location     Type
-  block           2    0[COMRAM] PTR void 
-		 -> EEP_SPI_WriteByte@tu8Data(3), 
-  blockSize       2    2[COMRAM] unsigned int 
- Auto vars:     Size  Location     Type
-  data            2    4[COMRAM] PTR unsigned char 
-		 -> EEP_SPI_WriteByte@tu8Data(3), 
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         4       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         6       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        6 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_EEP_SPI_WriteByte
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_EnableWrite *****************
- Defined at:
-		line 7 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		wreg, status,2, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		_SPI_ExchangeByte
- This function is called by:
-		_EEP_SPI_WriteByte
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_ReadByte *****************
- Defined at:
-		line 33 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-  Fu8Address      1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  Fu8Address      1    2[COMRAM] unsigned char 
-  u8ReadData      1    3[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         2       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        2 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    2
- This function calls:
-		_EEP_SPI_IsWriteInProgress
-		_SPI_ExchangeByte
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_IsWriteInProgress *****************
- Defined at:
-		line 14 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-  u8WIP           1    1[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      _Bool 
- Registers used:
-		wreg, status,2, status,0, cstack
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- Hardware stack levels required when called:    1
- This function calls:
-		_SPI_ExchangeByte
- This function is called by:
-		_EEP_SPI_ReadByte
-		_EEP_SPI_WriteByte
- This function uses a non-reentrant model
-
-
- *************** function _SPI_ExchangeByte *****************
- Defined at:
-		line 22 in file "spi.c"
- Parameters:    Size  Location     Type
-  data            1    wreg     unsigned char 
- Auto vars:     Size  Location     Type
-  data            1    0[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  1    wreg      unsigned char 
- Registers used:
-		wreg, status,2
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        1 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_EEP_SPI_EnableWrite
-		_EEP_SPI_IsWriteInProgress
-		_EEP_SPI_ReadByte
-		_SPI_WriteBlock
-		_SPI_ReadBlock
- This function uses a non-reentrant model
-
-
- *************** function _EEP_SPI_Initialize *****************
- Defined at:
-		line 3 in file "eep_spi.c"
- Parameters:    Size  Location     Type
-		None
- Auto vars:     Size  Location     Type
-		None
- Return value:  Size  Location     Type
-                  1    wreg      void 
- Registers used:
-		None
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK11  BANK12  BANK13  BANK14  BANK15
-      Params:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0
-Total ram usage:        0 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_main
- This function uses a non-reentrant model
-
-
-
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
-/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awdiv.c
-		___awdiv       		CODE           	13CA	0000	197
+/opt/microchip/xc8/v2.40/pic/sources/c90/common/awmod.c
+		___awmod       		CODE           	148E	0000	176
 
-/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awdiv.c estimated size: 197
+/opt/microchip/xc8/v2.40/pic/sources/c90/common/awmod.c estimated size: 176
 
 afficheur.c
-		_d2command     		CODE           	16A6	0000	111
-		_write_d_aff   		CODE           	1A26	0000	27
-		_clear_text    		CODE           	1878	0000	59
-		_initialisation_afficheur		CODE           	1216	0000	227
-		_write_c_aff   		CODE           	1A40	0000	27
-		_drawVericalLine		CODE           	191E	0000	49
-		_clear_graphics		CODE           	18B2	0000	59
-		_delai_us_char 		CODE           	194E	0000	47
-		_draw_string   		CODE           	153E	0000	123
-		_plot1         		CODE           	12F8	0000	211
-		_goto_lico     		CODE           	15B8	0000	121
-		_command       		CODE           	1A02	0000	37
-		_wait_status_ok		CODE           	1630	0000	119
-		_d1command     		CODE           	1768	0000	79
-		_check_status_ok		CODE           	183E	0000	59
+		_d2command     		CODE           	16A6	0000	110
+		_write_d_aff   		CODE           	1A26	0000	26
+		_clear_text    		CODE           	1878	0000	58
+		_initialisation_afficheur		CODE           	1216	0000	226
+		_write_c_aff   		CODE           	1A40	0000	26
+		_drawVericalLine		CODE           	191E	0000	48
+		_clear_graphics		CODE           	18B2	0000	58
+		_delai_us_char 		CODE           	194E	0000	46
+		_draw_string   		CODE           	153E	0000	122
+		_plot1         		CODE           	12F8	0000	210
+		_goto_lico     		CODE           	15B8	0000	120
+		_command       		CODE           	1A02	0000	36
+		_wait_status_ok		CODE           	1630	0000	118
+		_d1command     		CODE           	1768	0000	78
+		_check_status_ok		CODE           	183E	0000	58
 
-afficheur.c estimated size: 1355
+afficheur.c estimated size: 1340
+
+/opt/microchip/xc8/v2.40/pic/sources/c90/common/awdiv.c
+		___awdiv       		CODE           	13CA	0000	196
+
+/opt/microchip/xc8/v2.40/pic/sources/c90/common/awdiv.c estimated size: 196
 
 spi.c
-		_SPI_ExchangeByte		CODE           	1A5A	0000	27
-		_SPI_ExchangeBlock		CODE           	1714	0000	85
-		_SPI_Initialize		CODE           	1A74	0000	23
+		_SPI_ExchangeByte		CODE           	1A5A	0000	26
+		_SPI_ExchangeBlock		CODE           	1714	0000	84
+		_SPI_Initialize		CODE           	1A74	0000	22
 
-spi.c estimated size: 135
+spi.c estimated size: 132
 
 eep_spi.c
-		_EEP_SPI_EnableWrite		CODE           	1A9A	0000	13
-		_EEP_SPI_ReadByte		CODE           	18EC	0000	51
-		_EEP_SPI_WriteByte		CODE           	17B6	0000	77
-		_EEP_SPI_Initialize		CODE           	1AA6	0000	3
-		_EEP_SPI_IsWriteInProgress		CODE           	197C	0000	47
-		_EEP_SPI_WriteBytes		CODE           	1802	0000	61
+		_EEP_SPI_EnableWrite		CODE           	1A9A	0000	12
+		_EEP_SPI_ReadByte		CODE           	18EC	0000	50
+		_EEP_SPI_WriteByte		CODE           	17B6	0000	76
+		_EEP_SPI_Initialize		CODE           	1AA6	0000	2
+		_EEP_SPI_IsWriteInProgress		CODE           	197C	0000	46
+		_EEP_SPI_WriteBytes		CODE           	1802	0000	60
 
-eep_spi.c estimated size: 252
+eep_spi.c estimated size: 246
 
 shared
-		__initialization		CODE           	19AA	0000	39
+		__initialization		CODE           	19AA	0000	38
 
-shared estimated size: 39
-
-/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awmod.c
-		___awmod       		CODE           	148E	0000	177
-
-/Applications/microchip/xc8/v2.10/pic/sources/c99/common/awmod.c estimated size: 177
+shared estimated size: 38
 
 main.c
-		_initialisation_des_ports		CODE           	19D6	0000	45
-		_main          		CODE           	1008	0000	527
+		_initialisation_des_ports		CODE           	19D6	0000	44
+		_main          		CODE           	1008	0000	526
 
-main.c estimated size: 572
+main.c estimated size: 570
 
