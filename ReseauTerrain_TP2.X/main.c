@@ -12,6 +12,8 @@
 #include "spi.h"
 #include "eep_spi.h"
 #include "UART.h"
+#include "I2C.h"
+#include "afficheur.h"
 
 void initialisation_des_ports()
 {
@@ -46,30 +48,19 @@ void initialisation_des_ports()
 
 void main(void)
 {
+    initialisation_des_ports();
+    initialisation_afficheur();
+    clear_text();
+    clear_graphics();
+
+    goto_lico(0,0);
+    draw_string("Hello World");
+    I2C_Init();
+    I2C_Write_Register(0xA0, 0x08, 0x00);
+    I2C_Write_Register(0xA0,0x00,0x20); //AO for write and A1 for read
+
     while(1)
     {
-        SSP1CON2bits.SEN = 1; // Envoi du bit de start
-        //while(PIR1bits.SSP1IF == 0){}
-        //PIR1bits.SSP1IF = 0;
-        while(SSP1CON2bits.SEN){}
-
-        SSP1BUF = 0x90; // adresse du convertisseur dig/ana
-        while(SSP1CON2bits.ACKSTAT == 1){}; // tant que acquittement du convertisseur non reçu
-        while(PIR1bits.SSP1IF == 0){}
-        PIR1bits.SSP1IF = 0;
-
-        SSP1BUF = 0x40; // bits de contrôle
-        while(SSP1CON2bits.ACKSTAT == 1){}; // tant que acquittement du convertisseur non reçu
-        while(PIR1bits.SSP1IF == 0){}
-        PIR1bits.SSP1IF = 0;
-
-        SSP1BUF = VAL; // bits de données 0 à 255
-        while(SSP1CON2bits.ACKSTAT == 1){}; // tant que acquittement du convertisseur non reçu
-        while(PIR1bits.SSP1IF == 0){}
-        PIR1bits.SSP1IF = 0;
-
-        SSP1CON2bits.PEN = 1; // Envoi du bit de stop
-        while(PIR1bits.SSP1IF == 0){}
-        PIR1bits.SSP1IF = 0;
+        draw_string(I2C_Read(0xA1));
     }
 }

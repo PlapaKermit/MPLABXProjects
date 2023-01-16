@@ -23,11 +23,12 @@ extern "C" {
 // Include du projet
 #include "afficheur.h"
 
+
     
         /* Configuration du PIC:
     Oscillateur: HS (12MHz)
-    Watchdog Timer: désactivé
-    Protection du code: désactivé */
+    Watchdog Timer: dï¿½sactivï¿½
+    Protection du code: dï¿½sactivï¿½ */
 #pragma config CONFIG1L = 0x15 //RC0 et RC1 actif
 #pragma config CONFIG1H = 0x13 //HS1_OSC (4-16MHz) with pllx4 12MHz x 4 = 48MHz
 #pragma config CONFIG2L = 0x61 //BOR et PWRT Disable
@@ -42,7 +43,7 @@ extern "C" {
 #pragma config CONFIG7L = 0xFF //No table read protection
 #pragma config CONFIG7H = 0x40 //No table read protection
 
-    // Défintion des broches
+    // Dï¿½fintion des broches
 
 //PORTA
 #define     BOTTOM      LATAbits.LATA0
@@ -114,7 +115,7 @@ extern "C" {
 #define     DRIVEB      LATGbits.LATG4
 
 //PORTH
-// Bus de donnée afficheur GLCD
+// Bus de donnï¿½e afficheur GLCD
 
 //PORTJ
 #define     GLCD_CD     LATJbits.LATJ0
