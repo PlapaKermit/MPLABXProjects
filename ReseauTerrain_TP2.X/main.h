@@ -7,6 +7,7 @@
 
 #ifndef MAIN_H
 #define	MAIN_H
+#define _XTAL_FREQ 11059200
 
 #ifdef	__cplusplus
 extern "C" {

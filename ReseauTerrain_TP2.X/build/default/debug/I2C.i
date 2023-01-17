@@ -11164,7 +11164,7 @@ unsigned char __t3rd16on(void);
 # 34 "/home/delaf/.mchp_packs/Microchip/PIC18F-K_DFP/1.7.134/xc8/pic/include/xc.h" 2 3
 # 10 "I2C.c" 2
 # 1 "./main.h" 1
-# 19 "./main.h"
+# 20 "./main.h"
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/stdio.h" 1 3
 # 24 "/opt/microchip/xc8/v2.40/pic/include/c99/stdio.h" 3
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/bits/alltypes.h" 1 3
@@ -11309,11 +11309,11 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 19 "./main.h" 2
+# 20 "./main.h" 2
 
 
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/stdbool.h" 1 3
-# 21 "./main.h" 2
+# 22 "./main.h" 2
 
 
 
@@ -11341,7 +11341,7 @@ char *tempnam(const char *, const char *);
     void plot1(unsigned char x, unsigned char y);
     void plot0(unsigned char x, unsigned char y);
     void drawVericalLine(unsigned char ligne, unsigned char colonne, unsigned char lenght);
-# 24 "./main.h" 2
+# 25 "./main.h" 2
 
 
 
@@ -11374,37 +11374,62 @@ void I2C_Init(void)
     SSP1CON2 = 0x00;
     SSP1ADD = 0x77;
 }
-void I2C_Write_Register(int Address, int Register, int data){
+# 44 "I2C.c"
+void I2C_Write_Register(uint8_t u8Address, uint8_t u8Register, uint8_t u8Value) {
+
     SSP1CON2bits.SEN = 1;
-    while(SSP1CON2bits.SEN){}
+    while(SSP1CON2bits.SEN) {};
 
-    SSP1BUF = Address;
+    SSP1BUF = u8Address;
+
     PIR1bits.SSP1IF = 0;
 
-    while(SSP1CON2bits.ACKSTAT == 1){};
+    while (PIR1bits.SSP1IF == 0) {};
+    while (SSP1CON2bits.ACKSTAT == 1) {};
 
-    SSP1BUF = Register;
+    SSP1BUF = u8Register;
+
     PIR1bits.SSP1IF = 0;
 
+    while(PIR1bits.SSP1IF == 0) {};
     while(SSP1CON2bits.ACKSTAT == 1){};
 
-    SSP1BUF = data;
+    SSP1BUF = u8Value;
+    while(SSP1CON2bits.ACKSTAT == 1){};
+    while(PIR1bits.SSP1IF == 0){}
     PIR1bits.SSP1IF = 0;
-
-    while(SSP1CON2bits.ACKSTAT == 1){};
 
     SSP1CON2bits.PEN = 1;
     while(PIR1bits.SSP1IF == 0){}
     PIR1bits.SSP1IF = 0;
 }
-int I2C_Read (int Address){
+int I2C_Read (uint8_t Address, uint8_t Register){
     SSP1CON2bits.SEN = 1;
     while(SSP1CON2bits.SEN){}
 
-    SSP1BUF = Address;
-
+    SSP1BUF = (Address - 1);
+    PIR1bits.SSP1IF = 0;
     while(PIR1bits.SSP1IF == 0){}
     while(SSP1CON2bits.ACKSTAT == 1){};
+
+    SSP1BUF = Register;
+    PIR1bits.SSP1IF = 0;
+    while(PIR1bits.SSP1IF == 0){}
+    while(SSP1CON2bits.ACKSTAT == 1){};
+
+    SSP1CON2bits.SEN = 1;
+    while(SSP1CON2bits.SEN){}
+
+    SSP1BUF = (Address - 1);
+    PIR1bits.SSP1IF = 0;
+    while(PIR1bits.SSP1IF == 0){}
+    while(SSP1CON2bits.ACKSTAT == 1){};
+
+
+
+    SSP1CON2bits.PEN = 1;
+    while(PIR1bits.SSP1IF == 0){}
+    PIR1bits.SSP1IF = 0;
 
     return SSP1BUF;
 }

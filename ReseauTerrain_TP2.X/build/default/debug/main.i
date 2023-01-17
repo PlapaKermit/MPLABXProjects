@@ -11166,7 +11166,7 @@ unsigned char __t3rd16on(void);
 
 
 # 1 "./main.h" 1
-# 19 "./main.h"
+# 20 "./main.h"
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/stdio.h" 1 3
 # 24 "/opt/microchip/xc8/v2.40/pic/include/c99/stdio.h" 3
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/bits/alltypes.h" 1 3
@@ -11311,11 +11311,11 @@ char *ctermid(char *);
 
 
 char *tempnam(const char *, const char *);
-# 19 "./main.h" 2
+# 20 "./main.h" 2
 
 
 # 1 "/opt/microchip/xc8/v2.40/pic/include/c99/stdbool.h" 1 3
-# 21 "./main.h" 2
+# 22 "./main.h" 2
 
 
 
@@ -11343,7 +11343,7 @@ char *tempnam(const char *, const char *);
     void plot1(unsigned char x, unsigned char y);
     void plot0(unsigned char x, unsigned char y);
     void drawVericalLine(unsigned char ligne, unsigned char colonne, unsigned char lenght);
-# 24 "./main.h" 2
+# 25 "./main.h" 2
 
 
 
@@ -11421,11 +11421,20 @@ void UART_send_to_hyperterminal(unsigned char val);
 
 # 1 "./I2C.h" 1
 void I2C_Init(void);
-void I2C_Write_Register(int Address, int Register, int data);
-int I2C_Read (int Address);
+void I2C_Write_Register(uint8_t Address, uint8_t Register, uint8_t data);
+int I2C_Read (uint8_t Address, uint8_t Register);
 # 15 "main.c" 2
 
 
+
+void delai_ms(unsigned char val){
+
+
+
+    for (int j=0;j<val;j++) {
+        _delay((unsigned long)((1)*(11059200/4000.0)));
+    }
+}
 
 void initialisation_des_ports()
 {
@@ -11469,10 +11478,17 @@ void main(void)
     draw_string("Hello World");
     I2C_Init();
     I2C_Write_Register(0xA0, 0x08, 0x00);
+
+    I2C_Write_Register(0xA0, 0x01, 0x00);
+    I2C_Write_Register(0xA0, 0x02, 0x00);
+    I2C_Write_Register(0xA0, 0x03, 0x00);
+
     I2C_Write_Register(0xA0,0x00,0x20);
 
     while(1)
     {
-        draw_string(I2C_Read(0xA1));
+        draw_char(I2C_Read(0xA1,0x00));
+        delai_ms(100);
+        goto_lico(0,0);
     }
 }

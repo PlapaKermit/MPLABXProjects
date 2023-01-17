@@ -884,31 +884,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17970
 [; ;/home/delaf/.mchp_packs/Microchip/PIC18F-K_DFP/1.7.134/xc8/pic/include/proc/pic18f87k22.h: 17970: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"32 ./main.h
+"33 ./main.h
 [p x CONFIG1L  =  0x15  ]
-"33
-[p x CONFIG1H  =  0x13  ]
 "34
-[p x CONFIG2L  =  0x61  ]
+[p x CONFIG1H  =  0x13  ]
 "35
-[p x CONFIG2H  =  0x00  ]
+[p x CONFIG2L  =  0x61  ]
 "36
-[p x CONFIG3L  =  0x30  ]
+[p x CONFIG2H  =  0x00  ]
 "37
-[p x CONFIG3H  =  0x80  ]
+[p x CONFIG3L  =  0x30  ]
 "38
-[p x CONFIG4L  =  0x81  ]
+[p x CONFIG3H  =  0x80  ]
 "39
-[p x CONFIG5L  =  0xFF  ]
+[p x CONFIG4L  =  0x81  ]
 "40
-[p x CONFIG5H  =  0xC0  ]
+[p x CONFIG5L  =  0xFF  ]
 "41
-[p x CONFIG6L  =  0xFF  ]
+[p x CONFIG5H  =  0xC0  ]
 "42
-[p x CONFIG6H  =  0xE0  ]
+[p x CONFIG6L  =  0xFF  ]
 "43
-[p x CONFIG7L  =  0xFF  ]
+[p x CONFIG6H  =  0xE0  ]
 "44
+[p x CONFIG7L  =  0xFF  ]
+"45
 [p x CONFIG7H  =  0x40  ]
 "7 UART.c
 [; ;UART.c: 7: void UART_init(void)

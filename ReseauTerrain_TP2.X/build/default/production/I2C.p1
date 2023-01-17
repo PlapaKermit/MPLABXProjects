@@ -917,31 +917,31 @@ Version 4.0 HI-TECH Software Intermediate Code
 "17970
 [; ;/home/delaf/.mchp_packs/Microchip/PIC18F-K_DFP/1.7.134/xc8/pic/include/proc/pic18f87k22.h: 17970: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"32 ./main.h
+"33 ./main.h
 [p x CONFIG1L  =  0x15  ]
-"33
-[p x CONFIG1H  =  0x13  ]
 "34
-[p x CONFIG2L  =  0x61  ]
+[p x CONFIG1H  =  0x13  ]
 "35
-[p x CONFIG2H  =  0x00  ]
+[p x CONFIG2L  =  0x61  ]
 "36
-[p x CONFIG3L  =  0x30  ]
+[p x CONFIG2H  =  0x00  ]
 "37
-[p x CONFIG3H  =  0x80  ]
+[p x CONFIG3L  =  0x30  ]
 "38
-[p x CONFIG4L  =  0x81  ]
+[p x CONFIG3H  =  0x80  ]
 "39
-[p x CONFIG5L  =  0xFF  ]
+[p x CONFIG4L  =  0x81  ]
 "40
-[p x CONFIG5H  =  0xC0  ]
+[p x CONFIG5L  =  0xFF  ]
 "41
-[p x CONFIG6L  =  0xFF  ]
+[p x CONFIG5H  =  0xC0  ]
 "42
-[p x CONFIG6H  =  0xE0  ]
+[p x CONFIG6L  =  0xFF  ]
 "43
-[p x CONFIG7L  =  0xFF  ]
+[p x CONFIG6H  =  0xE0  ]
 "44
+[p x CONFIG7L  =  0xFF  ]
+"45
 [p x CONFIG7H  =  0x40  ]
 "12 I2C.c
 [; ;I2C.c: 12: void I2C_Init(void)
@@ -973,20 +973,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;I2C.c: 20: }
 [e :UE 830 ]
 }
-"21
-[; ;I2C.c: 21: void I2C_Write_Register(int Address, int Register, int data){
-[v _I2C_Write_Register `(v ~T0 @X0 1 ef3`i`i`i ]
+"44
+[; ;I2C.c: 44: void I2C_Write_Register(uint8_t u8Address, uint8_t u8Register, uint8_t u8Value) {
+[v _I2C_Write_Register `(v ~T0 @X0 1 ef3`uc`uc`uc ]
 {
 [e :U _I2C_Write_Register ]
-[v _Address `i ~T0 @X0 1 r1 ]
-[v _Register `i ~T0 @X0 1 r2 ]
-[v _data `i ~T0 @X0 1 r3 ]
+[v _u8Address `uc ~T0 @X0 1 r1 ]
+[v _u8Register `uc ~T0 @X0 1 r2 ]
+[v _u8Value `uc ~T0 @X0 1 r3 ]
 [f ]
-"22
-[; ;I2C.c: 22:     SSP1CON2bits.SEN = 1;
+"46
+[; ;I2C.c: 46:     SSP1CON2bits.SEN = 1;
 [e = . . _SSP1CON2bits 0 0 -> -> 1 `i `uc ]
-"23
-[; ;I2C.c: 23:     while(SSP1CON2bits.SEN){}
+"47
+[; ;I2C.c: 47:     while(SSP1CON2bits.SEN) {};
 [e $U 832  ]
 [e :U 833 ]
 {
@@ -994,14 +994,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 832 ]
 [e $ != -> . . _SSP1CON2bits 0 0 `i -> 0 `i 833  ]
 [e :U 834 ]
-"25
-[; ;I2C.c: 25:     SSP1BUF = Address;
-[e = _SSP1BUF -> _Address `uc ]
-"26
-[; ;I2C.c: 26:     PIR1bits.SSP1IF = 0;
+"49
+[; ;I2C.c: 49:     SSP1BUF = u8Address;
+[e = _SSP1BUF _u8Address ]
+"51
+[; ;I2C.c: 51:     PIR1bits.SSP1IF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"27
-[; ;I2C.c: 27:     while(PIR1bits.SSP1IF == 0){}
+"53
+[; ;I2C.c: 53:     while (PIR1bits.SSP1IF == 0) {};
 [e $U 835  ]
 [e :U 836 ]
 {
@@ -1009,8 +1009,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 835 ]
 [e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 836  ]
 [e :U 837 ]
-"28
-[; ;I2C.c: 28:     while(SSP1CON2bits.ACKSTAT == 1){};
+"54
+[; ;I2C.c: 54:     while (SSP1CON2bits.ACKSTAT == 1) {};
 [e $U 838  ]
 [e :U 839 ]
 {
@@ -1018,14 +1018,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 838 ]
 [e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 839  ]
 [e :U 840 ]
-"30
-[; ;I2C.c: 30:     SSP1BUF = Register;
-[e = _SSP1BUF -> _Register `uc ]
-"31
-[; ;I2C.c: 31:     PIR1bits.SSP1IF = 0;
+"56
+[; ;I2C.c: 56:     SSP1BUF = u8Register;
+[e = _SSP1BUF _u8Register ]
+"58
+[; ;I2C.c: 58:     PIR1bits.SSP1IF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"32
-[; ;I2C.c: 32:     while(PIR1bits.SSP1IF == 0){}
+"60
+[; ;I2C.c: 60:     while(PIR1bits.SSP1IF == 0) {};
 [e $U 841  ]
 [e :U 842 ]
 {
@@ -1033,8 +1033,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 841 ]
 [e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 842  ]
 [e :U 843 ]
-"33
-[; ;I2C.c: 33:     while(SSP1CON2bits.ACKSTAT == 1){};
+"61
+[; ;I2C.c: 61:     while(SSP1CON2bits.ACKSTAT == 1){};
 [e $U 844  ]
 [e :U 845 ]
 {
@@ -1042,35 +1042,35 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 844 ]
 [e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 845  ]
 [e :U 846 ]
-"35
-[; ;I2C.c: 35:     SSP1BUF = data;
-[e = _SSP1BUF -> _data `uc ]
-"36
-[; ;I2C.c: 36:     PIR1bits.SSP1IF = 0;
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"37
-[; ;I2C.c: 37:     while(PIR1bits.SSP1IF == 0){}
+"63
+[; ;I2C.c: 63:     SSP1BUF = u8Value;
+[e = _SSP1BUF _u8Value ]
+"64
+[; ;I2C.c: 64:     while(SSP1CON2bits.ACKSTAT == 1){};
 [e $U 847  ]
 [e :U 848 ]
 {
 }
 [e :U 847 ]
-[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 848  ]
+[e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 848  ]
 [e :U 849 ]
-"38
-[; ;I2C.c: 38:     while(SSP1CON2bits.ACKSTAT == 1){};
+"65
+[; ;I2C.c: 65:     while(PIR1bits.SSP1IF == 0){}
 [e $U 850  ]
 [e :U 851 ]
 {
 }
 [e :U 850 ]
-[e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 851  ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 851  ]
 [e :U 852 ]
-"40
-[; ;I2C.c: 40:     SSP1CON2bits.PEN = 1;
+"66
+[; ;I2C.c: 66:     PIR1bits.SSP1IF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"68
+[; ;I2C.c: 68:     SSP1CON2bits.PEN = 1;
 [e = . . _SSP1CON2bits 0 2 -> -> 1 `i `uc ]
-"41
-[; ;I2C.c: 41:     while(PIR1bits.SSP1IF == 0){}
+"69
+[; ;I2C.c: 69:     while(PIR1bits.SSP1IF == 0){}
 [e $U 853  ]
 [e :U 854 ]
 {
@@ -1078,25 +1078,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 853 ]
 [e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 854  ]
 [e :U 855 ]
-"42
-[; ;I2C.c: 42:     PIR1bits.SSP1IF = 0;
+"70
+[; ;I2C.c: 70:     PIR1bits.SSP1IF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"43
-[; ;I2C.c: 43: }
+"71
+[; ;I2C.c: 71: }
 [e :UE 831 ]
 }
-"44
-[; ;I2C.c: 44: int I2C_Read (int Address){
-[v _I2C_Read `(i ~T0 @X0 1 ef1`i ]
+"72
+[; ;I2C.c: 72: int I2C_Read (uint8_t Address, uint8_t Register){
+[v _I2C_Read `(i ~T0 @X0 1 ef2`uc`uc ]
 {
 [e :U _I2C_Read ]
-[v _Address `i ~T0 @X0 1 r1 ]
+[v _Address `uc ~T0 @X0 1 r1 ]
+[v _Register `uc ~T0 @X0 1 r2 ]
 [f ]
-"45
-[; ;I2C.c: 45:     SSP1CON2bits.SEN = 1;
+"73
+[; ;I2C.c: 73:     SSP1CON2bits.SEN = 1;
 [e = . . _SSP1CON2bits 0 0 -> -> 1 `i `uc ]
-"46
-[; ;I2C.c: 46:     while(SSP1CON2bits.SEN){}
+"74
+[; ;I2C.c: 74:     while(SSP1CON2bits.SEN){}
 [e $U 857  ]
 [e :U 858 ]
 {
@@ -1104,14 +1105,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 857 ]
 [e $ != -> . . _SSP1CON2bits 0 0 `i -> 0 `i 858  ]
 [e :U 859 ]
-"48
-[; ;I2C.c: 48:     SSP1BUF = Address;
-[e = _SSP1BUF -> _Address `uc ]
-"49
-[; ;I2C.c: 49:     PIR1bits.SSP1IF = 0;
+"76
+[; ;I2C.c: 76:     SSP1BUF = (Address - 1);
+[e = _SSP1BUF -> - -> _Address `i -> 1 `i `uc ]
+"77
+[; ;I2C.c: 77:     PIR1bits.SSP1IF = 0;
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-"50
-[; ;I2C.c: 50:     while(PIR1bits.SSP1IF == 0){}
+"78
+[; ;I2C.c: 78:     while(PIR1bits.SSP1IF == 0){}
 [e $U 860  ]
 [e :U 861 ]
 {
@@ -1119,8 +1120,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 860 ]
 [e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 861  ]
 [e :U 862 ]
-"51
-[; ;I2C.c: 51:     while(SSP1CON2bits.ACKSTAT == 1){};
+"79
+[; ;I2C.c: 79:     while(SSP1CON2bits.ACKSTAT == 1){};
 [e $U 863  ]
 [e :U 864 ]
 {
@@ -1128,11 +1129,86 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 863 ]
 [e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 864  ]
 [e :U 865 ]
-"53
-[; ;I2C.c: 53:     return SSP1BUF;
+"81
+[; ;I2C.c: 81:     SSP1BUF = Register;
+[e = _SSP1BUF _Register ]
+"82
+[; ;I2C.c: 82:     PIR1bits.SSP1IF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"83
+[; ;I2C.c: 83:     while(PIR1bits.SSP1IF == 0){}
+[e $U 866  ]
+[e :U 867 ]
+{
+}
+[e :U 866 ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 867  ]
+[e :U 868 ]
+"84
+[; ;I2C.c: 84:     while(SSP1CON2bits.ACKSTAT == 1){};
+[e $U 869  ]
+[e :U 870 ]
+{
+}
+[e :U 869 ]
+[e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 870  ]
+[e :U 871 ]
+"86
+[; ;I2C.c: 86:     SSP1CON2bits.SEN = 1;
+[e = . . _SSP1CON2bits 0 0 -> -> 1 `i `uc ]
+"87
+[; ;I2C.c: 87:     while(SSP1CON2bits.SEN){}
+[e $U 872  ]
+[e :U 873 ]
+{
+}
+[e :U 872 ]
+[e $ != -> . . _SSP1CON2bits 0 0 `i -> 0 `i 873  ]
+[e :U 874 ]
+"89
+[; ;I2C.c: 89:     SSP1BUF = (Address - 1);
+[e = _SSP1BUF -> - -> _Address `i -> 1 `i `uc ]
+"90
+[; ;I2C.c: 90:     PIR1bits.SSP1IF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"91
+[; ;I2C.c: 91:     while(PIR1bits.SSP1IF == 0){}
+[e $U 875  ]
+[e :U 876 ]
+{
+}
+[e :U 875 ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 876  ]
+[e :U 877 ]
+"92
+[; ;I2C.c: 92:     while(SSP1CON2bits.ACKSTAT == 1){};
+[e $U 878  ]
+[e :U 879 ]
+{
+}
+[e :U 878 ]
+[e $ == -> . . _SSP1CON2bits 0 6 `i -> 1 `i 879  ]
+[e :U 880 ]
+"96
+[; ;I2C.c: 96:     SSP1CON2bits.PEN = 1;
+[e = . . _SSP1CON2bits 0 2 -> -> 1 `i `uc ]
+"97
+[; ;I2C.c: 97:     while(PIR1bits.SSP1IF == 0){}
+[e $U 881  ]
+[e :U 882 ]
+{
+}
+[e :U 881 ]
+[e $ == -> . . _PIR1bits 0 3 `i -> 0 `i 882  ]
+[e :U 883 ]
+"98
+[; ;I2C.c: 98:     PIR1bits.SSP1IF = 0;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+"100
+[; ;I2C.c: 100:     return SSP1BUF;
 [e ) -> _SSP1BUF `i ]
 [e $UE 856  ]
-"54
-[; ;I2C.c: 54: }
+"101
+[; ;I2C.c: 101: }
 [e :UE 856 ]
 }

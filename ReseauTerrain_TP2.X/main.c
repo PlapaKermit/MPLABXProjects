@@ -15,6 +15,15 @@
 #include "I2C.h"
 #include "afficheur.h"
 
+void delai_ms(unsigned char val){
+/* Utilisation de la fonction temporisation delay_ms définie dans « xc.h »
+__delay_ms( val) ;
+*/
+    for (int j=0;j<val;j++) {
+        __delay_ms(1);
+    }
+}
+
 void initialisation_des_ports()
 {
 // D�sactivation du bus externe
@@ -57,10 +66,17 @@ void main(void)
     draw_string("Hello World");
     I2C_Init();
     I2C_Write_Register(0xA0, 0x08, 0x00);
+    //Mise a zero du ctu
+    I2C_Write_Register(0xA0, 0x01, 0x00);
+    I2C_Write_Register(0xA0, 0x02, 0x00);
+    I2C_Write_Register(0xA0, 0x03, 0x00);
+
     I2C_Write_Register(0xA0,0x00,0x20); //AO for write and A1 for read
 
     while(1)
     {
-        draw_string(I2C_Read(0xA1));
+        draw_char(I2C_Read(0xA1,0x00));
+        delai_ms(100);
+        goto_lico(0,0);
     }
 }
